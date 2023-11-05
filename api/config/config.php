@@ -1,6 +1,6 @@
 <?php
 
-define('DB_HOST', 'localhost');
+define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'project22');
 define('DB_USER', 'project22_admin');
 define('DB_PASSWORD', 'project22!');
