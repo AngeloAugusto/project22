@@ -2,22 +2,26 @@
 
 require_once '../config/config.php';
 
-class Database {
+class Database
+{
     private $connection;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->connect();
     }
 
-    private function connect() {
-        $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    private function connect()
+    {
+        $this->connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD);
+        mysqli_select_db($this->connection, DB_NAME);
         if ($this->connection->connect_error) {
             die("Connection failed: " . $this->connection->connect_error);
         }
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->connection;
     }
 }

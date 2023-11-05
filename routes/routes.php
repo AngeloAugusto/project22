@@ -1,6 +1,7 @@
 <?php
 
 require_once '../controllers/birthdays_controller.php';
+require_once '../utils/database.php';
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
