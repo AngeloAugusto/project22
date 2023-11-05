@@ -23,9 +23,9 @@ class BirthdayModel {
     }
 
     public function create($data) {
-		$query = "INSERT INTO birthdays (name, birthday) VALUES (?, ?)";
+		$query = "INSERT INTO birthdays (name, birthday) VALUES (?, STR_TO_DATE(?, '%d/%m/%Y'))";
 		$stmt = $this->conn->prepare($query);
-		$stmt->bind_param('ss', $data['name'], $data['birthday']);
+		$stmt->bind_param('ss', $data['name'],$data['birthday']);
 
 		if ($stmt->execute()) {
 			return ['status' => 'success', 'message' => 'Foi criado com sucesso'];
