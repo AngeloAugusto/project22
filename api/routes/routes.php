@@ -7,7 +7,7 @@ $uri = $_SERVER['REQUEST_URI'];
 $uriSegments = explode('/', parse_url($uri, PHP_URL_PATH));
 
 $dbConnection = (new Database())->getConnection();
-$controller = new birthdayController($dbConnection);
+$controller = new BirthdayController($dbConnection);
 
 if ($uriSegments[1] === 'birthdays') {
     $id = isset($uriSegments[2]) ? intval($uriSegments[2]) : null;
