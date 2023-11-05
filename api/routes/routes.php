@@ -1,15 +1,15 @@
 <?php
 
-require_once '../controllers/example_controller.php';
+require_once '../controllers/birthdays_controller.php';
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
 $uriSegments = explode('/', parse_url($uri, PHP_URL_PATH));
 
 $dbConnection = (new Database())->getConnection();
-$controller = new ExampleController($dbConnection);
+$controller = new birthdayController($dbConnection);
 
-if ($uriSegments[1] === 'example') {
+if ($uriSegments[1] === 'birthdays') {
     $id = isset($uriSegments[2]) ? intval($uriSegments[2]) : null;
 
     switch ($requestMethod) {
@@ -27,14 +27,14 @@ if ($uriSegments[1] === 'example') {
             if ($id) {
                 $response = $controller->update($id);
             } else {
-                $response = ['status' => 'error', 'message' => 'Invalid example ID'];
+                $response = ['status' => 'error', 'message' => 'Invalid birthday ID'];
             }
             break;
         case 'DELETE':
             if ($id) {
                 $response = $controller->delete($id);
             } else {
-                $response = ['status' => 'error', 'message' => 'Invalid example ID'];
+                $response = ['status' => 'error', 'message' => 'Invalid birthday ID'];
             }
             break;
         default:
