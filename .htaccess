@@ -1,4 +1,4 @@
-RewriteEngine On
+RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.+)$ api/routes/routes.php [QSA,L]
+RewriteRule ^(.+)$ routes/routes.php [QSA,L]
