@@ -45,5 +45,5 @@ if ($uriSegments[1] === 'birthdays') {
     $response = ['status' => 'error', 'message' => 'Invalid API endpoint'];
 }
 
-//header('Content-Type: application/json');
-//echo json_encode($response);
+header('Content-Type: application/json');
+echo json_encode($response);
