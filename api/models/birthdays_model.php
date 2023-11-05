@@ -1,6 +1,6 @@
 <?php
 
-class ExampleModel {
+class BirthdayModel {
     private $conn;
     
     public function __construct($dbConnection) {

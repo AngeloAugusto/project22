@@ -1,40 +1,45 @@
 <?php
 
-require_once '../models/example_model.php';
+require_once '../models/birthdays_model.php';
 
-class ExampleController {
-    private $model;
-    
-    public function __construct($dbConnection) {
-        $this->model = new ExampleModel($dbConnection);
-    }
+class BirthdayController
+{
+	private $model;
 
-    public function getAll() {
-        $result = $this->model->getAll();
-        $examples = [];
+	public function __construct($dbConnection)
+	{
+		$this->model = new BirthdayModel($dbConnection);
+	}
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                array_push($examples, $row);
-            }
-            return ['status' => 'success', 'data' => $examples];
-        } else {
-            return ['status' => 'error', 'message' => 'No examples found'];
-        }
-    }
+	public function getAll()
+	{
+		$result = $this->model->getAll();
+		$birthdays = [];
 
-    public function get($id) {
-        $result = $this->model->get($id);
+		if ($result->num_rows > 0) {
+			while ($row = $result->fetch_assoc()) {
+				array_push($birthdays, $row);
+			}
+			return ['status' => 'success', 'data' => $birthdays];
+		} else {
+			return ['status' => 'error', 'message' => 'No birthdays found'];
+		}
+	}
 
-        if ($result->num_rows > 0) {
-            $example = $result->fetch_assoc();
-            return ['status' => 'success', 'data' => $example];
-        } else {
-            return ['status' => 'error', 'message' => 'Example not found'];
-        }
-    }
+	public function get($id)
+	{
+		$result = $this->model->get($id);
 
-	public function create() {
+		if ($result->num_rows > 0) {
+			$example = $result->fetch_assoc();
+			return ['status' => 'success', 'data' => $example];
+		} else {
+			return ['status' => 'error', 'message' => 'Example not found'];
+		}
+	}
+
+	public function create()
+	{
 		$data = json_decode(file_get_contents('php://input'), true);
 
 		if (!empty($data['name']) && !empty($data['birthday'])) {
@@ -46,7 +51,8 @@ class ExampleController {
 		}
 	}
 
-	public function update($id) {
+	public function update($id)
+	{
 		$data = json_decode(file_get_contents('php://input'), true);
 
 		if (!empty($data['name']) && !empty($data['birthday'])) {
@@ -58,7 +64,8 @@ class ExampleController {
 		}
 	}
 
-	public function delete($id) {
+	public function delete($id)
+	{
 		if (!empty($id)) {
 			$result = $this->model->delete($id);
 
@@ -67,5 +74,4 @@ class ExampleController {
 			return ['status' => 'error', 'message' => 'Invalid example ID'];
 		}
 	}
-
 }
