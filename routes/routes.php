@@ -10,8 +10,8 @@ $uriSegments = explode('/', parse_url($uri, PHP_URL_PATH));
 $dbConnection = (new Database())->getConnection();
 $controller = new BirthdayController($dbConnection);
 
-if ($uriSegments[1] === 'birthdays') {
-    $id = isset($uriSegments[2]) ? intval($uriSegments[2]) : null;
+if ($uriSegments[2] === 'birthdays') {
+    $id = isset($uriSegments[3]) ? intval($uriSegments[3]) : null;
 
     switch ($requestMethod) {
         case 'GET':
