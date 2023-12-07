@@ -11,12 +11,12 @@ $dbConnection = (new Database())->getConnection();
 $controller = new BirthdayController($dbConnection);
 
 if ($uriSegments[2] === 'birthdays') {
-    $id = isset($uriSegments[3]) ? intval($uriSegments[3]) : null;
+    $arg = isset($uriSegments[3]) ? intval($uriSegments[3]) : null;
 
     switch ($requestMethod) {
         case 'GET':
-            if ($id) {
-                $response = $controller->get($id);
+            if ($arg) {
+                $response = $controller->get($arg);
             } else {
                 $response = $controller->getAll();
             }
@@ -25,15 +25,15 @@ if ($uriSegments[2] === 'birthdays') {
             $response = $controller->create();
             break;
         case 'PUT':
-            if ($id) {
-                $response = $controller->update($id);
+            if ($arg) {
+                $response = $controller->update($arg);
             } else {
                 $response = ['status' => 'error', 'message' => 'Invalid birthday ID'];
             }
             break;
         case 'DELETE':
-            if ($id) {
-                $response = $controller->delete($id);
+            if ($arg) {
+                $response = $controller->delete($arg);
             } else {
                 $response = ['status' => 'error', 'message' => 'Invalid birthday ID'];
             }
