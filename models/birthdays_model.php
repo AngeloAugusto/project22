@@ -1,29 +1,34 @@
 <?php
 
-class BirthdayModel {
-    private $conn;
-    
-    public function __construct($dbConnection) {
-        $this->conn = $dbConnection;
-    }
+class BirthdayModel
+{
+	private $conn;
 
-    public function getAll() {
-        $query = "SELECT * FROM birthdays";
-        $result = $this->conn->query($query);
-        return $result;
-    }
+	public function __construct($dbConnection)
+	{
+		$this->conn = $dbConnection;
+	}
 
-    public function get($id) {
-        $query = "SELECT * FROM birthdays WHERE id = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result;
-    }
+	public function getAll()
+	{
+		$query = "SELECT * FROM birthdays";
+		$result = $this->conn->query($query);
+		return $result;
+	}
 
-    public function create($data) {
-		
+	public function get($id)
+	{
+		$query = "SELECT * FROM birthdays WHERE id = ?";
+		$stmt = $this->conn->prepare($query);
+		$stmt->bind_param('i', $id);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		return $result;
+	}
+
+	public function create($data)
+	{
+
 		$query = "INSERT INTO birthdays (name, birthday, description) VALUES (?, STR_TO_DATE(?, '%d/%m/%Y'), ?)";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bind_param('sss', $data['name'], $data['birthday'], $data['description']);
@@ -35,10 +40,11 @@ class BirthdayModel {
 		}
 	}
 
-	public function update($id, $data) {
-		$query = "UPDATE birthdays SET name = ?, birthday = ? WHERE id = ?";
+	public function update($id, $data)
+	{
+		$query = "UPDATE birthdays SET name = ?, birthday = ?, description = ? WHERE id = ?";
 		$stmt = $this->conn->prepare($query);
-		$stmt->bind_param('ssi', $data['name'], $data['birthday'], $id);
+		$stmt->bind_param('sssi', $data['name'], $data['birthday'], $data['description'], $id);
 
 		if ($stmt->execute()) {
 			return ['status' => 'success', 'message' => 'Foi atualizado com sucesso'];
@@ -47,7 +53,8 @@ class BirthdayModel {
 		}
 	}
 
-	public function delete($id) {
+	public function delete($id)
+	{
 		$query = "DELETE FROM birthdays WHERE id = ?";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bind_param('i', $id);

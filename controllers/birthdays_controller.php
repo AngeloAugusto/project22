@@ -42,7 +42,7 @@ class BirthdayController
 	{
 		$data = json_decode(file_get_contents('php://input'), true);
 
-		if (!empty($data['name']) && !empty($data['birthday'])) {
+		if (!empty($data['name']) && !empty($data['birthday']) && !empty($data['description'])) {
 			$result = $this->model->create($data);
 
 			return $result;
@@ -55,7 +55,7 @@ class BirthdayController
 	{
 		$data = json_decode(file_get_contents('php://input'), true);
 
-		if (!empty($data['name']) && !empty($data['birthday'])) {
+		if (!empty($data['name']) && !empty($data['birthday']) && !empty($data['description'])) {
 			$result = $this->model->update($id, $data);
 
 			return $result;
