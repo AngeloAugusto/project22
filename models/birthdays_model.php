@@ -42,7 +42,7 @@ class BirthdayModel
 
 	public function update($id, $data)
 	{
-		$query = "UPDATE birthdays SET name = ?, birthday = ?, description = ? WHERE id = ?";
+		$query = "UPDATE birthdays SET name = ?, birthday = (?, STR_TO_DATE(?, '%d/%m/%Y'), description = ? WHERE id = ?";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bind_param('sssi', $data['name'], $data['birthday'], $data['description'], $id);
 
